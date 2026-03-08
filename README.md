@@ -35,15 +35,33 @@ When Claude is working, you'll hear updates like:
 
 ## Installation
 
-### Local Installation
+### Install as a Claude Code Plugin
 
-1. Clone this repository into your Claude Code plugins directory:
+The recommended way to install claude-voice is directly through Claude Code:
+
+1. Open Claude Code and run the slash command:
+   ```
+   /install-plugin https://github.com/adjit/claude-voice
+   ```
+
+2. Claude Code will clone the repository and register the plugin. Once registered, run the install script to fetch the TTS model and dependencies:
+   ```bash
+   bash scripts/install.sh
+   ```
+
+3. Restart Claude Code (or start a new session) — narration will be active.
+
+### Local Installation (from source)
+
+If you prefer to install manually from a local copy:
+
+1. Clone this repository:
    ```bash
    git clone https://github.com/adjit/claude-voice.git
    cd claude-voice
    ```
 
-2. Run the install script:
+2. Run the install script to fetch dependencies and the TTS model:
    ```bash
    bash scripts/install.sh
    ```
@@ -52,9 +70,16 @@ When Claude is working, you'll hear updates like:
    - Install Python dependencies (`kokoro-onnx`, `soundfile`, `requests`, `tqdm`)
    - Download the Kokoro TTS model (~82MB) to `~/.cache/claude-voice/`
 
-3. The plugin will activate automatically on your next Claude Code session.
+3. Register the plugin with Claude Code by pointing it at the cloned directory (note the three slashes for `file://` + absolute path):
+   ```
+   /install-plugin file:///home/youruser/claude-voice
+   ```
 
-### Manual Installation
+4. Restart Claude Code — the plugin will activate on your next session.
+
+### Manual Dependency Installation
+
+If you only need to install the Python dependencies and model without the plugin registration step:
 
 ```bash
 pip3 install -r requirements.txt
