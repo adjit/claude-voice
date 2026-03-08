@@ -284,5 +284,56 @@ class TestPluginManifest(unittest.TestCase):
         self.assertIn("on_output", manifest["hooks"])
 
 
+class TestMarketplaceJson(unittest.TestCase):
+    """Tests for the plugin marketplace JSON file."""
+
+    def test_marketplace_json_exists(self):
+        """marketplace.json should exist at the repo root."""
+        marketplace_path = PLUGIN_DIR / "marketplace.json"
+        self.assertTrue(marketplace_path.exists())
+
+    def test_marketplace_json_valid(self):
+        """marketplace.json should be valid JSON with required fields."""
+        marketplace_path = PLUGIN_DIR / "marketplace.json"
+        with open(marketplace_path) as f:
+            data = json.load(f)
+
+        self.assertEqual(data["name"], "claude-voice")
+        self.assertIn("version", data)
+        self.assertIn("description", data)
+        self.assertIn("author", data)
+        self.assertIn("repository", data)
+
+    def test_marketplace_json_directory_field(self):
+        """marketplace.json should include a directory mapping."""
+        marketplace_path = PLUGIN_DIR / "marketplace.json"
+        with open(marketplace_path) as f:
+            data = json.load(f)
+
+        self.assertIn("directory", data)
+        directory = data["directory"]
+        self.assertIsInstance(directory, dict)
+        self.assertTrue(len(directory) > 0)
+
+    def test_marketplace_json_plugin_directory(self):
+        """marketplace.json should reference the .claude-plugin directory."""
+        marketplace_path = PLUGIN_DIR / "marketplace.json"
+        with open(marketplace_path) as f:
+            data = json.load(f)
+
+        self.assertIn("plugin_directory", data)
+        self.assertEqual(data["plugin_directory"], ".claude-plugin")
+        self.assertIn("plugin_manifest", data)
+        self.assertEqual(data["plugin_manifest"], ".claude-plugin/plugin.json")
+
+    def test_marketplace_json_repository_url(self):
+        """Repository URL should point to GitHub."""
+        marketplace_path = PLUGIN_DIR / "marketplace.json"
+        with open(marketplace_path) as f:
+            data = json.load(f)
+
+        self.assertIn("github.com", data["repository"])
+
+
 if __name__ == "__main__":
     unittest.main()
