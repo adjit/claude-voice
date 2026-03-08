@@ -17,8 +17,8 @@
         "email": "adjit@users.noreply.github.com"
       },
       "source": {
-        "source": "github",
-        "repo": "adjit/claude-voice"
+        "source": "url",
+        "url": "https://github.com/adjit/claude-voice.git"
       },
       "category": "accessibility"
     }
