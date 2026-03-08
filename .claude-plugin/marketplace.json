@@ -16,7 +16,10 @@
         "name": "adjit",
         "email": "adjit@users.noreply.github.com"
       },
-      "source": ".",
+      "source": {
+        "source": "github",
+        "repo": "adjit/claude-voice"
+      },
       "category": "accessibility"
     }
   ]
