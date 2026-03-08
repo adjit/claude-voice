@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Output hook for claude-voice plugin.
+"""DEPRECATED: Output hook for claude-voice plugin.
 
-Reads Claude's output from stdin, detects [NARRATE: "..."] markers,
-speaks the text using TTS, and removes markers from the output
-displayed to the user.
+This file is no longer used. Claude Code does not have an 'on_output' hook.
+The plugin now uses:
+- Stop hook (hooks/stop_hook.py) - speaks summary when Claude finishes
+- MCP server (mcp/server.py) - provides 'speak' tool Claude can call
+
+This file is kept for reference only.
 """
 
 import logging

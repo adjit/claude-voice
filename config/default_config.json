@@ -1,7 +1,9 @@
 {
   "enabled": true,
+  "mode": "stop",
   "voice": "af_bella",
   "speed": 1.1,
   "model_path": "models/kokoro-v0_19.onnx",
-  "voices_path": "models/voices.json"
+  "voices_path": "models/voices.json",
+  "summary_max_length": 200
 }
