@@ -17,6 +17,9 @@ PLUGIN_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_CONFIG_PATH = PLUGIN_DIR / "config" / "default_config.json"
 USER_CONFIG_PATH = Path.home() / ".claude-voice.json"
 
+# Valid modes
+VALID_MODES = ("stop", "mcp", "both")
+
 
 def load_config() -> Dict[str, Any]:
     """Load plugin configuration with user overrides.
@@ -37,10 +40,12 @@ def load_config() -> Dict[str, Any]:
         logger.warning("Failed to load default config: %s", e)
         config = {
             "enabled": True,
+            "mode": "stop",
             "voice": "af_bella",
             "speed": 1.1,
             "model_path": "models/kokoro-v0_19.onnx",
             "voices_path": "models/voices.json",
+            "summary_max_length": 200,
         }
 
     # Merge user overrides
@@ -52,5 +57,10 @@ def load_config() -> Dict[str, Any]:
             logger.debug("Loaded user config from %s", USER_CONFIG_PATH)
         except (json.JSONDecodeError, OSError) as e:
             logger.warning("Failed to load user config: %s", e)
+
+    # Validate mode
+    if config.get("mode") not in VALID_MODES:
+        logger.warning("Invalid mode '%s', defaulting to 'stop'", config.get("mode"))
+        config["mode"] = "stop"
 
     return config

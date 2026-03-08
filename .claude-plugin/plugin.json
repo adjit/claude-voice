@@ -1,11 +1,19 @@
 {
   "name": "claude-voice",
-  "version": "1.0.0",
-  "description": "Adds conversational TTS narration to Claude Code sessions using local Kokoro model",
+  "version": "2.0.0",
+  "description": "Adds TTS narration to Claude Code using local Kokoro model",
   "author": "adjit",
   "hooks": {
-    "system_prompt": "python3 hooks/system_prompt.py",
-    "on_output": "python3 hooks/on_output.py"
-  },
-  "post_install": "bash scripts/install.sh"
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/stop_hook.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
 }

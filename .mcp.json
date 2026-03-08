@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "claude-voice": {
+      "command": "python",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/server.py"]
+    }
+  }
+}
