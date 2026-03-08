@@ -2,7 +2,10 @@
   "name": "claude-voice",
   "version": "2.0.0",
   "description": "Adds TTS narration to Claude Code using local Kokoro model",
-  "author": "adjit",
+  "author": {
+      "name": "adjit",
+      "email": "adjit@users.noreply.github.com"
+  },
   "hooks": {
     "Stop": [
       {
