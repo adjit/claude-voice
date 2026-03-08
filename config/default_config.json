@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "voice": "af_bella",
+  "speed": 1.1,
+  "model_path": "models/kokoro-v0_19.onnx",
+  "voices_path": "models/voices.json"
+}
