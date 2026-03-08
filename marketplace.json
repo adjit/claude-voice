@@ -1,0 +1,45 @@
+{
+  "name": "claude-voice",
+  "version": "1.0.0",
+  "description": "Adds conversational TTS narration to Claude Code sessions using local Kokoro model",
+  "author": "adjit",
+  "repository": "https://github.com/adjit/claude-voice",
+  "categories": ["productivity", "accessibility", "tts"],
+  "tags": ["voice", "tts", "narration", "audio", "kokoro", "onnx"],
+  "license": "MIT",
+  "install_command": "/install-plugin https://github.com/adjit/claude-voice",
+  "post_install": "bash scripts/install.sh",
+  "plugin_directory": ".claude-plugin",
+  "plugin_manifest": ".claude-plugin/plugin.json",
+  "directory": {
+    ".claude-plugin/": "Plugin manifest directory",
+    ".claude-plugin/plugin.json": "Plugin manifest with hooks and metadata",
+    "hooks/": "Claude Code hook scripts",
+    "hooks/system_prompt.py": "Injects narration instructions into the system prompt",
+    "hooks/on_output.py": "Detects [NARRATE: \"...\"] markers and sends them to TTS engine",
+    "src/": "Core plugin source code",
+    "src/__init__.py": "Package initializer",
+    "src/config.py": "Configuration loader (default + user overrides)",
+    "src/tts_engine.py": "Kokoro ONNX TTS wrapper",
+    "src/audio_player.py": "Cross-platform audio playback",
+    "src/model_manager.py": "Auto-download Kokoro model on first use",
+    "config/": "Default configuration files",
+    "config/default_config.json": "Default plugin settings",
+    "models/": "Downloaded TTS model files (populated on first run)",
+    "scripts/": "Setup and utility scripts",
+    "scripts/install.sh": "Post-install script to download models and dependencies",
+    "tests/": "Unit tests",
+    "tests/test_plugin.py": "Plugin unit tests",
+    "requirements.txt": "Python dependencies",
+    "README.md": "Documentation",
+    "LICENSE": "MIT license"
+  },
+  "requirements": {
+    "python": ">=3.8",
+    "platform": {
+      "linux": ["espeak-ng", "aplay or paplay or ffplay"],
+      "macos": [],
+      "windows": []
+    }
+  }
+}
